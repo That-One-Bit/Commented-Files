@@ -159,6 +159,13 @@ __This pack comes with a CTRPF plugin. Please ensure you read the [requirements.
             <td>1.0.1</td>
         </tr>
         <tr>
+            <td>MODLIST</td>
+            <td>Cracko298</td>
+            <td>Lists all the Installed LunaCore Mods.</td>
+            <td>Made for this pack</td>
+            <td>1.0.0</td>
+        </tr>
+        <tr>
             <td>New Base Skins</td>
             <td>TheRustico36</td>
             <td>Adds the new looks of Steve and Alex introduced in Java Edition 1.19.3.</td>
@@ -199,6 +206,13 @@ __This pack comes with a CTRPF plugin. Please ensure you read the [requirements.
             <td>Prevents undead mobs from swimming for parity with newer versions of Minecraft.</td>
             <td>&#10003;</td>
             <td>N/A</td>
+        </tr>
+        <tr>
+            <td>HMR</td>
+            <td>Cracko298</td>
+            <td>Backports the Mace Weapon into Minecraft 3DS Edition.</td>
+            <td>Made for this pack</td>
+            <td>1.0.0</td>
         </tr>
         <tr>
             <td>Swappable Fonts</td>
