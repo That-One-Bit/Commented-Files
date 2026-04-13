@@ -28,10 +28,10 @@ Core.Debug.log("[HMR] Added Mace Weapon to Creative and Crafting Menu.")
 
 -- Register Recipe for the Mace :3c
 Game.Recipes.OnRegisterRecipes:Connect(function (recipesTable)
-    local netherStar = Game.Items.findItemByName("nether_star")
-    local obsidian = Game.Items.findItemByName("obsidian")
-    local blazeRod = Game.Items.findItemByName("blaze_rod")
-    local diamond = Game.Items.findItemByName("diamond")
+    local netherStar = Game.Items.findItemByID(399)
+    local obsidian = Game.Items.findItemByID(49)
+    local blazeRod = Game.Items.findItemByID(369)
+    local diamond = Game.Items.findItemByID(264)
     if netherStar and obsidian and blazeRod and diamond then -- Check no nil
         local netherStarInst = Game.Items.getItemInstance(netherStar, 1, 0)
         local obsidianInst = Game.Items.getItemInstance(obsidian, 1, 0)
