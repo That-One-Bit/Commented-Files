@@ -137,7 +137,7 @@ spearsModReg:buildResources()
 -- Spear Logic System
 local SPEAR_RUNTIME = {
     spearBaseDamage = {
-        [WOODEN_SPEAR.ID]  = 2, -- wooden_spear
+        [WOODEN_SPEAR.ID]  = 1, -- wooden_spear
         [STONE_SPEAR.ID]  = 2, -- stone_spear
         [IRON_SPEAR.ID]  = 3, -- iron_spear
         [GOLD_SPEAR.ID]  = 2, -- golden_spear
@@ -154,6 +154,8 @@ local SPEAR_RUNTIME = {
     creativeDashCooldown     = 1.00,
     loopDelay                = 0.01,
 
+    horizontalMoveThreshold  = 0.035,
+
     dashActive               = false,
     dashEndTime              = 0,
     nextDashTime             = 0,
@@ -165,7 +167,8 @@ local SPEAR_RUNTIME = {
     lastDamageAddr           = nil,
     lastBaseDamage           = nil,
     lastAppliedDamage        = nil,
-    cooldownNoticeTime       = 0
+    cooldownNoticeTime       = 0,
+    noMoveNoticeTime         = 0
 }
 
 local function roundNumber(v)
@@ -295,22 +298,13 @@ local function getVelocityMagnitudeHorizontal()
     return math.sqrt((vx * vx) + (vz * vz)), vx, vy, vz
 end
 
-local function getVelocityMagnitudeAllDirections()
-    local vx, vy, vz = Game.LocalPlayer.Velocity.get()
-    vx = vx or 0.0
-    vy = vy or 0.0
-    vz = vz or 0.0
-
-    return math.sqrt((vx * vx) + (vy * vy) + (vz * vz)), vx, vy, vz
-end
-
 local function performDash()
     local now = Core.System.getTime()
 
     if now < SPEAR_RUNTIME.nextDashTime then
         if now >= SPEAR_RUNTIME.cooldownNoticeTime then
             local remaining = SPEAR_RUNTIME.nextDashTime - now
-            Core.Debug.message(string.format("Dash cooldown: %.1fs", remaining))
+            Game.World.message(string.format("[SPAERZ] Cooldown: %.1fs", remaining))
             SPEAR_RUNTIME.cooldownNoticeTime = now + 0.5
         end
         return
@@ -324,12 +318,13 @@ local function performDash()
     local dashMultiplier, dashCooldown = getDashSettings()
     local mag, vx, vy, vz = getVelocityMagnitudeHorizontal()
 
-    if mag < 0.01 then
-        local yaw = Game.LocalPlayer.Camera.Yaw or 0.0
-        local yawRad = math.rad(yaw)
-        vx = -math.sin(yawRad)
-        vz =  math.cos(yawRad)
-        vy = 0.0
+    -- Please don't fall back to camera yaw when standing still.
+    if mag < SPEAR_RUNTIME.horizontalMoveThreshold then
+        if now >= SPEAR_RUNTIME.noMoveNoticeTime then
+            Game.World.message("[SPAERZ] Standing Still...")
+            SPEAR_RUNTIME.noMoveNoticeTime = now + 0.5
+        end
+        return
     end
 
     Game.LocalPlayer.Velocity.set(vx * dashMultiplier, vy, vz * dashMultiplier)
@@ -339,14 +334,15 @@ local function performDash()
     SPEAR_RUNTIME.nextDashTime = now + dashCooldown
 
     if isCreativeOrFlying() then
-        Core.Debug.log("[SPAERZ] Creative dash used (half power, 1s cooldown)")
+        Core.Debug.log("[SPAERZ] Creative horizontal dash used (half power, 1s cooldown)")
     else
-        Core.Debug.log("[SPAERZ] Survival dash used (full power, 3s cooldown)")
+        Core.Debug.log("[SPAERZ] Survival horizontal dash used (full power, 3s cooldown)")
     end
 end
 
 function mainLogicFunction()
     if not Game.LocalPlayer.Loaded or not Game.World.Loaded then
+        SPEAR_RUNTIME.started = false
         restoreLastBaseDamage()
         return
     end
@@ -355,6 +351,7 @@ function mainLogicFunction()
 
     local item, itemId, baseDamage = getHeldSpearInfo()
     if item and Game.Gamepad.isDown(Game.Gamepad.KeyCodes.L) then
+        Async.wait(SPEAR_RUNTIME.loopDelay+0.0025)
         performDash()
     end
 
@@ -363,7 +360,7 @@ function mainLogicFunction()
     end
 
     if item and Game.Gamepad.isDown(Game.Gamepad.KeyCodes.R) then
-        local speedMagnitude = getVelocityMagnitudeAllDirections()
+        local speedMagnitude = getVelocityMagnitudeHorizontal()
         local boostedDamage = baseDamage + (speedMagnitude * SPEAR_RUNTIME.velocityDamageMultiplier)
         applyHeldSpearDamage(boostedDamage)
     else
@@ -376,16 +373,33 @@ local function startSpearVelocitySystem()
         return
     end
 
+    if not Game.LocalPlayer.Loaded or not Game.World.Loaded then
+        Core.Debug.message("[SPAERZ] Join a world before starting SPAERZ.")
+        SPEAR_RUNTIME.started = false
+        return
+    end
+
     SPEAR_RUNTIME.started = true
+    Game.World.message("[SPAERZ] Runtime Started.")
 
     Async.run(function()
-        while true do
+        while SPEAR_RUNTIME.started do
+            if not Game.LocalPlayer.Loaded or not Game.World.Loaded then
+                SPEAR_RUNTIME.started = false
+                SPEAR_RUNTIME.dashActive = false
+                restoreLastBaseDamage()
+                return
+            end
+
             mainLogicFunction()
             Async.wait(SPEAR_RUNTIME.loopDelay)
         end
-    end)
 
-    Core.Debug.message("SPAERZ runtime started.")
+        SPEAR_RUNTIME.dashActive = false
+        SPEAR_RUNTIME.started = false
+        restoreLastBaseDamage()
+        Core.Debug.log("[SPAERZ] Runtime loop stopped.")
+    end)
 end
 
 local rootFolder = Core.Menu.getMenuFolder()
@@ -406,6 +420,8 @@ Game.World.OnWorldJoin:Connect(function()
 end)
 
 Game.World.OnWorldLeave:Connect(function()
+    SPEAR_RUNTIME.started = false
+    SPEAR_RUNTIME.dashActive = false
     restoreLastBaseDamage()
 end)
 

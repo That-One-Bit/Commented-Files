@@ -188,8 +188,9 @@ local function updateFallDistance()
 end
 
 local function applyMaceFallDamage()
-    if not Game.LocalPlayer or not Game.LocalPlayer.Inventory then
+    if not Game.LocalPlayer or not Game.LocalPlayer.Inventory or not Game.World.Loaded then
         resetMacePointerState()
+        maceState.started = false
         return
     end
 
@@ -239,13 +240,11 @@ local function startMaceSystem()
     maceState.started = true
 
     Async.run(function()
-        while true do
+        while maceState.started do
             applyMaceFallDamage()
             Async.wait(maceState.loopDelay)
         end
     end)
-
-    Core.Debug.message("HMR Runtime Started.")
 end
 
 local rootFolder = Core.Menu.getMenuFolder()
@@ -267,6 +266,8 @@ end)
 
 Game.World.OnWorldLeave:Connect(function()
     resetMacePointerState()
+    maceState.started = false
+
 end)
 
 if Game.LocalPlayer.Loaded and Game.World.Loaded then
