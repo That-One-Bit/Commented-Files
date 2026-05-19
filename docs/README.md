@@ -79,7 +79,7 @@ __This pack comes with a CTRPF plugin. Please ensure you read the [requirements.
             <td>wyndchyme</td>
             <td>Emulates the look of Classic Minecraft. Overwrites Candy texture pack.</td>
             <td>Made for this pack</td>
-            <td>1.0.5</td>
+            <td>1.0.6</td>
         </tr>
         <tr>
             <td>Cleann'slick GUI</td>
@@ -105,7 +105,7 @@ __This pack comes with a CTRPF plugin. Please ensure you read the [requirements.
         <tr>
             <td>FOVSlider</td>
             <td>Cracko298</td>
-            <td>The 3D-Slider now updates the FOV in real-time.</td>
+            <td>Allows FOV adjustment via the 3D slider.</td>
             <td>&#10003;</td>
             <td>1.0.1</td>
         </tr>
@@ -161,7 +161,7 @@ __This pack comes with a CTRPF plugin. Please ensure you read the [requirements.
         <tr>
             <td>MODLIST</td>
             <td>Cracko298</td>
-            <td>Lists all the Installed LunaCore Mods.</td>
+            <td>Lists all the installed LunaCore mods.</td>
             <td>Made for this pack</td>
             <td>1.0.0</td>
         </tr>
@@ -175,7 +175,7 @@ __This pack comes with a CTRPF plugin. Please ensure you read the [requirements.
         <tr>
             <td>SPAERZ</td>
             <td>Cracko298</td>
-            <td>Adds the Spear Weapon Type(s) into Minecraft 3DS Edition.</td>
+            <td>Backports the spear weapon type.</td>
             <td>&#10003;</td>
             <td>1.8.4</td>
         </tr>
@@ -210,7 +210,7 @@ __This pack comes with a CTRPF plugin. Please ensure you read the [requirements.
         <tr>
             <td>HMR</td>
             <td>Cracko298</td>
-            <td>Backports the Mace Weapon into Minecraft 3DS Edition.</td>
+            <td>Backports the mace.</td>
             <td>Made for this pack</td>
             <td>1.0.0</td>
         </tr>
@@ -224,7 +224,7 @@ __This pack comes with a CTRPF plugin. Please ensure you read the [requirements.
         <tr>
             <td>Dynamic(s)</td>
             <td>Cracko298</td>
-            <td>Adds Dynamic Foggy Weather, and Dynamic Cloud Height(s).</td>
+            <td>Adds dynamic foggy weather and cloud heights.</td>
             <td>Ported from megapackPlugin</td>
             <td>1.0.X</td>
         </tr>
