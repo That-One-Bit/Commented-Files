@@ -351,7 +351,7 @@ function mainLogicFunction()
 
     local item, itemId, baseDamage = getHeldSpearInfo()
     if item and Game.Gamepad.isDown(Game.Gamepad.KeyCodes.L) then
-        Async.wait(SPEAR_RUNTIME.loopDelay+0.01)
+        Async.wait(SPEAR_RUNTIME.loopDelay+0.0025)
         performDash()
     end
 
