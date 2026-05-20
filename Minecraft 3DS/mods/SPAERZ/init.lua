@@ -238,7 +238,7 @@ local function resolveDamageAddress(item, itemId, baseDamage)
 
     local itemPtr = getItemPointerFromUserdata(item)
     if not itemPtr then
-        Core.Debug.log("[SPAERZ] Failed to resolve item pointer for item ID " .. tostring(itemId))
+        Core.Debug.log("[SPAERZ] Failed to resolve item pointer for item ID " .. tostring(itemId), false)
         return nil
     end
 
@@ -253,7 +253,7 @@ local function resolveDamageAddress(item, itemId, baseDamage)
     Core.Debug.log(string.format(
         "[SPAERZ] Bound spear item ID %d -> ptr 0x%08X -> damage addr 0x%08X",
         itemId, itemPtr, damageAddr
-    ))
+    ), false)
 
     return damageAddr
 end
@@ -304,7 +304,7 @@ local function performDash()
     if now < SPEAR_RUNTIME.nextDashTime then
         if now >= SPEAR_RUNTIME.cooldownNoticeTime then
             local remaining = SPEAR_RUNTIME.nextDashTime - now
-            Game.World.message(string.format("[SPAERZ] Cooldown: %.1fs", remaining))
+            -- Game.World.message(string.format("[SPAERZ] Cooldown: %.1fs", remaining))
             SPEAR_RUNTIME.cooldownNoticeTime = now + 0.5
         end
         return
@@ -321,7 +321,7 @@ local function performDash()
     -- Please don't fall back to camera yaw when standing still.
     if mag < SPEAR_RUNTIME.horizontalMoveThreshold then
         if now >= SPEAR_RUNTIME.noMoveNoticeTime then
-            Game.World.message("[SPAERZ] Standing Still...")
+            -- Game.World.message("[SPAERZ] Standing Still...")
             SPEAR_RUNTIME.noMoveNoticeTime = now + 0.5
         end
         return
@@ -334,9 +334,9 @@ local function performDash()
     SPEAR_RUNTIME.nextDashTime = now + dashCooldown
 
     if isCreativeOrFlying() then
-        Core.Debug.log("[SPAERZ] Creative horizontal dash used (half power, 1s cooldown)")
+        Core.Debug.log("[SPAERZ] Creative horizontal dash used (half power, 1s cooldown)", false)
     else
-        Core.Debug.log("[SPAERZ] Survival horizontal dash used (full power, 3s cooldown)")
+        Core.Debug.log("[SPAERZ] Survival horizontal dash used (full power, 3s cooldown)", false)
     end
 end
 
@@ -374,7 +374,7 @@ local function startSpearVelocitySystem()
     end
 
     if not Game.LocalPlayer.Loaded or not Game.World.Loaded then
-        Core.Debug.message("[SPAERZ] Join a world before starting SPAERZ.")
+        -- Core.Debug.message("[SPAERZ] Join a world before starting SPAERZ.")
         SPEAR_RUNTIME.started = false
         return
     end
@@ -398,7 +398,7 @@ local function startSpearVelocitySystem()
         SPEAR_RUNTIME.dashActive = false
         SPEAR_RUNTIME.started = false
         restoreLastBaseDamage()
-        Core.Debug.log("[SPAERZ] Runtime loop stopped.")
+        Core.Debug.log("[SPAERZ] Runtime loop stopped.", false)
     end)
 end
 
@@ -411,11 +411,11 @@ end)
 
 mainFolder:newEntry("Start Spear Runtime Manually", function()
     startSpearVelocitySystem()
-    Core.Debug.log("[SPAERZ] Started SPAERZ Runtime Loop Manually.", true)
+    Core.Debug.log("[SPAERZ] Started SPAERZ Runtime Loop Manually.", false)
 end)
 
 Game.World.OnWorldJoin:Connect(function()
-    Core.Debug.log("[SPAERZ] Started SPAERZ Runtime Loop.", true)
+    Core.Debug.log("[SPAERZ] Started SPAERZ Runtime Loop.", false)
     startSpearVelocitySystem()
 end)
 
@@ -426,6 +426,6 @@ Game.World.OnWorldLeave:Connect(function()
 end)
 
 if Game.LocalPlayer.Loaded and Game.World.Loaded then
-    Core.Debug.log("[SPAERZ] Started SPAERZ Runtime Loop (Ignore this Log).")
+    Core.Debug.log("[SPAERZ] Started SPAERZ Runtime Loop (Ignore this Log).", false)
     startSpearVelocitySystem()
 end
