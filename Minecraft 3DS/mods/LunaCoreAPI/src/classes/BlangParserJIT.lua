@@ -2,7 +2,7 @@ local ffi = require("ffi")
 jit.off()
 
 local log = function (msg)
-    Core.Debug.log(tostring(msg), true)
+    -- Core.Debug.log(tostring(msg), true) -- do nothing, basically stopping that stuff from showing at loading.
 end
 
 ---@class LCAPI_BlangParser
