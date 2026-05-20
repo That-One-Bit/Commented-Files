@@ -24,7 +24,7 @@ Core.Debug.log("[HMR] Registered Mace - Name: " .. MACE_WEAPON.NameID .. " | ID:
 CoreAPI.ItemGroups.registerEntries(CoreAPI.ItemGroups.TOOLS, function (entries)
     entries:addAfter(MACE_WEAPON, "lead")
 end)
-Core.Debug.log("[HMR] Added Mace Weapon to Creative and Crafting Menu.")
+Core.Debug.log("[HMR] Added Mace Weapon to Creative and Crafting Menu.", false)
 
 -- Register Recipe for the Mace :3c
 Game.Recipes.OnRegisterRecipes:Connect(function (recipesTable)
@@ -41,7 +41,7 @@ Game.Recipes.OnRegisterRecipes:Connect(function (recipesTable)
         Game.Recipes.registerShapedRecipe(recipesTable, maceWeaponInst, 2, 510, "DND", "OBO", " B ", {{"D", diamondInst}, {"N", netherStarInst}, {"O", obsidianInst}, {"B", blazeRodInst}})
     end
 end)
-Core.Debug.log("[HMR] Registered the Crafting Recipe for Mace Weapon.")
+Core.Debug.log("[HMR] Registered the Crafting Recipe for Mace Weapon.", false)
 
 -- Build the Resources when loading the mod for the first time.
 hmrModReg:buildResources()
@@ -256,11 +256,11 @@ end)
 
 mainFolder:newEntry("Start Mace Runtime Manually", function()
     startMaceSystem()
-    Core.Debug.log("[HMR] Started Mace Runtime Loop Manually.", true)
+    Core.Debug.log("[HMR] Started Mace Runtime Loop Manually.", false)
 end)
 
 Game.World.OnWorldJoin:Connect(function()
-    Core.Debug.log("[HMR] Started Mace Runtime Loop.", true)
+    Core.Debug.log("[HMR] Started Mace Runtime Loop.", false)
     startMaceSystem()
 end)
 
@@ -271,6 +271,6 @@ Game.World.OnWorldLeave:Connect(function()
 end)
 
 if Game.LocalPlayer.Loaded and Game.World.Loaded then
-    Core.Debug.log("[HMR] Started Mace Runtime Loop (Ignore this Log).")
+    Core.Debug.log("[HMR] Started Mace Runtime Loop (Ignore this Log).", false)
     startMaceSystem()
 end
