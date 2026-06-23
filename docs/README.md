@@ -12,7 +12,7 @@
 </div>
 
 <br>
-<p> The contents of this repository belongs to Wyndchime, and have only been modified as to allow for community works and examples of LunaCore scripts. </p>
+<p style="word-wrap=normal;text-align=center"> The contents of this repository belongs to Wyndchime, and have only been modified as to allow for community works and examples of LunaCore scripts. </p>
 <br>
 
 # Table of Contents 
