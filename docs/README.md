@@ -4,15 +4,15 @@
 <div align="center">
 <p style="text-align=center"> -- Commented -- </p> 
  <a href="https://github.com/wyndchyme/mc3ds-modern/releases/latest">
- <img src="https://img.shields.io/github/v/release/wyndchyme/mc3ds-modern?color=darkgreen"></a>
- <a href="https://minecraft.wiki/w/New_Nintendo_3DS_Edition_1.9.19"><img src="https://img.shields.io/badge/for-1.9.19-purple"></a>
- <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/wyndchyme/mc3ds-modern">
- <a href="https://github.com/Minecraft-3DS-Community/Minecraft-3ds-unistore"><img src="https://img.shields.io/badge/avaliable%20on-Unistore-red"></a>
- <a href="https://github.com/wyndchyme/mc3ds-modern/releases/latest"><img src="https://img.shields.io/badge/avaliable%20on-GitHub-yellow"></a>
+ <img alt="Static Badge" src="https://img.shields.io/badge/3.2.0-t?style=plastic&label=Based%20off%20of&color=5c1500">
+</a>
+ <a href="https://minecraft.wiki/w/New_Nintendo_3DS_Edition_1.9.19"><img src="https://img.shields.io/badge/for-scripting-57338a?style=plastic"></a>
+ <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/That-One-Bit/Commented-Files?style=plastic">
+ <a href="https://github.com/Minecraft-3DS-Community/Minecraft-3ds-unistore"><img src="https://img.shields.io/badge/lua%20and-json-005c78?style=plastic"></a>
+ <a href="https://github.com/wyndchyme/mc3ds-modern/releases/latest"><img alt="Static Badge" src="https://img.shields.io/badge/GitHub-t?style=plastic&logo=github&label=Available%20on&color=blue">
+</a>
 </div>
 
-<br>
-<p style="word-wrap=normal;text-align=center"> The contents of this repository belongs to Wyndchime, and have only been modified as to allow for community works and examples of LunaCore scripts. </p>
 <br>
 
 # Table of Contents 
@@ -37,9 +37,10 @@
 <br>
 
 # Overview
-This is a modpack for Minecraft: New Nintendo 3DS Edition that aims to modernize the game. This pack adds new texture packs (including a 100% conversion of the post-1.14 textures), a new look for the game's user interface and icons, the original Minecraft font, the ability to swap between fonts at will in the Language menu, and more.
+This is a fork of the Modernization Megapack for Minecraft: New Nintendo 3ds Edition. It includes commented files for all of the scripts located in the modpack, extra scripts created by me, and a revised readme. Not all of the content created in this repository is a part of the Megapack, will be a part of the Megapack, or was created by Wyndchime. Do not ask for these features to be added, unless you have a reason for them to be. The files located in this repository should all be commented, with the exception of marked (...*.lua). Example scripts can be found in my other repository: [Examples And More](https://github.com/That-One-Bit/ExamplesAndMore).
+<br>
 
-__This pack only officially supports English (US) and English (UK). Other languages can be used but will have lesser compatibility with Modernization MegaPack and the larger font.__
+__The custom scripts made for LunaCore featured here only officially support English, but will work with all consoles.__
 
 __This pack comes with a CTRPF plugin. Please ensure you read the [requirements.](#requirements)__
 
@@ -295,7 +296,7 @@ __This pack comes with a CTRPF plugin. Please ensure you read the [requirements.
         <tr><td>Sheeptastic</td><td>Vance</td><td>Mob/Edits</td><td>Fully</td><td>N/A</td></tr>
         <tr><td>Sink, Don't Swim</td><td>Nikki (Swapdoodle)</td><td>Mob/Edits</td><td>Fully</td><td>Included</td></tr>
         <tr><td>Skyblock+</td><td>Cracko298</td><td>Map/World</td><td>Fully</td><td>N/A</td></tr>
-        <tr><td>Stronghold Fix</td><td>Vance</td><td>Game/Fix</td><td>Fully</td><td>N/A</td></tr>
+        <tr><td>Stronghold Fix</td><td>Vance</td><td>Game/Fix</td><td>Fully</td><td>Included</td></tr>
         <tr><td>Technoblade's Crown</td><td>Vance</td><td>Texture</td><td>Mostly (95%)</td><td>Minor Textures</td></tr>
         <tr><td>The Stalker</td><td>Cracko298</td><td>Mod/Entity</td><td>Fully</td><td>N/A</td></tr>
         <tr><td>TNT Mimics</td><td>Cracko298</td><td>Mob/Edits</td><td>Unusable (30%)</td><td>Major Textures</td></tr>
@@ -534,6 +535,13 @@ _Certain mods developed specifically for Modernization MegaPack have also been r
 - [Classic Textures](https://github.com/wyndchyme/mc3ds-classic-textures)
 - [New Achievement Art](https://github.com/wyndchyme/mc3ds-achievements)
 
-_You can request for a mod to be released as a standalone pack [here.](https://github.com/wyndchyme/mc3ds-modern/issues)_
+_You can request for a mod to be released as a standalone pack, or added to the Megapack [here.](https://github.com/wyndchyme/mc3ds-modern/issues)_
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+## Requests
+
+I am taking requests for mods using the LunaCore API and runtime, within reason. Adding tools for copper and such is possible, but adding custom blocks without replacing unused ones is not. To continue using the custom blocks that come with the Modernization Megapack, do not use any mods that add blocks from this repository.
+
+_To make a request, make an issue on [this repository](https://github.com/That-One-Bit/Commented-Files/issues)._
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small><br>
+<small><i><a href='https://shields.io/'>Badges/Shields generated by Shields.io</a></i></small>
